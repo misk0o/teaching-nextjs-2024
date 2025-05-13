@@ -9,6 +9,7 @@ type Props = {
   initialPriceTo: string | null;
   initialSearchText: string | null;
   initialCategory: string | null;
+  initialCondition: string | null;
 };
 
 export function MarketplaceFilters({
@@ -16,11 +17,13 @@ export function MarketplaceFilters({
   initialPriceTo,
   initialSearchText,
   initialCategory,
+  initialCondition,
 }: Props) {
   const [priceFrom, setPriceFrom] = useState<string>(initialPriceFrom ?? "");
   const [priceTo, setPriceTo] = useState<string>(initialPriceTo ?? "");
   const [searchText, setSearchText] = useState<string>(initialSearchText ?? "");
   const [category, setCategory] = useState<string>(initialCategory ?? "");
+  const [condition, setCondition] = useState<string>(initialCondition ?? "");
 
   const queryParams: { [key: string]: string } = {};
   if (priceFrom != "") {
@@ -34,6 +37,9 @@ export function MarketplaceFilters({
   }
   if (category != "") {
     queryParams["category"] = category;
+  }
+  if (condition != "") {
+    queryParams["condition"] = condition;
   }
 
   return (
@@ -82,6 +88,39 @@ export function MarketplaceFilters({
           onClick={() => {
             setCategory("");
           }}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </label>
+      <label className="my-4 flex items-center gap-2">
+        Condition:
+        <select
+          className="select select-bordered"
+          value={condition}
+          onChange={(e) => setCondition(e.target.value)}
+        >
+          <option value="">All conditions</option>
+          <option value="new">New</option>
+          <option value="used">Used</option>
+          <option value="like_new">Like New</option>
+          <option value="unused">Unused</option>
+        </select>
+        <button
+          className="btn btn-circle btn-xs btn-outline"
+          onClick={() => setCondition("")}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

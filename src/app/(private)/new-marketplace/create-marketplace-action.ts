@@ -9,7 +9,8 @@ export async function createMarketplace(
   description: string,
   price: number,
   category: string,
-  photoUrls: string[]
+  photoUrls: string[],
+  condition: string
 ) {
   const userId = assertAuth();
 
@@ -22,6 +23,7 @@ export async function createMarketplace(
       description,
       price,
       category,
+      condition,
       userId,
       createdAt: new Date().getTime(),
     })

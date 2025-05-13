@@ -19,6 +19,7 @@ export interface Comments {
 
 export interface Marketplace {
   category: string;
+  condition: Generated<string>;
   createdAt: number;
   description: string;
   id: Generated<number>;

@@ -7,7 +7,7 @@ type FormValues = {
   name: string;
   description: string;
   price: string;
-  // category: string;
+  condition: string;
   photoUrls: string[];
 };
 
@@ -15,6 +15,7 @@ export function NewMarketplaceForm() {
   const { register, watch, setValue, handleSubmit } = useForm<FormValues>({
     defaultValues: {
       photoUrls: [],
+      condition: "new",
     },
   });
 
@@ -29,7 +30,8 @@ export function NewMarketplaceForm() {
           data.description,
           parseFloat(data.price),
           "car",
-          data.photoUrls
+          data.photoUrls,
+          data.condition
         );
       })}
     >
@@ -49,6 +51,12 @@ export function NewMarketplaceForm() {
         placeholder="Price"
         {...register("price")}
       />
+      <select className="select select-bordered" {...register("condition")}>
+        <option value="new">New</option>
+        <option value="used">Used</option>
+        <option value="like_new">Like New</option>
+        <option value="unused">Unused</option>
+      </select>
       <span>Photo urls</span>
       {photoUrls.map((photoUrl, index) => (
         <div key={index}>
